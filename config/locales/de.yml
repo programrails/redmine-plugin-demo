@@ -1,0 +1,7 @@
+# English strings go here for Rails i18n
+de:
+  # my_label: "My label"
+  contacts: Kontakten
+  label_contact_plural: Kontakten
+  label_contact_view_all: Alle Kontakten sehen
+  label_full_name_contacts: Kontakten

@@ -1,0 +1,65 @@
+<%= form_for(contact) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%
+    grouped_options = [
+     ['Contact',
+       Contact.all.map{|x| [x.full_name, "#{x.class.to_s}##{x.id}"]}],
+     ['Project',
+       Project.all.map{|x| [x.name, "#{x.class.to_s}##{x.id}"]}],
+     ['Issue',
+       Issue.all.map{|x| [x.subject, "#{x.class.to_s}##{x.id}"]}],
+     ['User',
+       User.where.not(login: "").map{|x| [x.login, "#{x.class.to_s}##{x.id}"]}]
+    ]
+    gos = grouped_options_for_select(grouped_options, selected: contact.contactable_type.try(:+, '#').try(:+, contact.contactable_id.to_s))
+  %>
+
+  Associated with:
+  <div class="field">
+    <%= select_tag(:parent_type_id, gos, include_blank: true ) %>
+  </div>
+
+  Contact type:
+  <div class="field">
+    <%= form.select(:ctype, options_for_select(["person", "company"])) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name, id: :contact_full_name %>
+  </div>  
+
+  <div class="field">
+    <%= form.label :company_website %>
+    <%= form.text_field :company_website, id: :contact_company_website %>
+  </div>
+
+  <div class="field">
+    <%= form.label :company_tax_id %>
+    <%= form.text_field :company_tax_id, id: :contact_company_tax_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :person_phone %>
+    <%= form.text_field :person_phone, id: :contact_person_phone %>
+  </div>
+
+  <% @contact.custom_field_values.each do |value| %>
+    <p><%= custom_field_tag_with_label :contact, value %></p>
+  <% end %>  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

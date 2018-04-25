@@ -1,0 +1,29 @@
+= A Demo Redmine plugin
+
+* New entity Contacts - as a plugin for Redmine
+* Contact types: Company (Website, Tax ID, Company info) + Personal contacts: Name, Surname, phone etc...
+* Parent structure: Company contacts could be Parent contact to personal contacts
+* Permissions: Global and Project
+* Contact could be added to project or related to particular Issue or User
+* Search by contacts
+* Lang files
+* Custom Fields
+
+= RSpec
+
+Command:
+
+rspec plugins --format documentation
+
+NOTE: The RSpec tests cover only a part of the plugin functionality (due to the development time shortage).
+
+= Rubocop
+
+Command:
+
+rubocop plugins/contacts
+
+= NOTE
+
+This plugin uses its own lang files. But the locale files are provided just for 3 languages
+(instead of all 49 locale files). The reason is that I can speak only 3 languages - not 49.

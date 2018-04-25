@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<%
+  @contacts = Contact.where(contactable_type: 'Issue', contactable_id: issue.id).all if @issue
+%>
+
+<h1>Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ctype</th>
+      <th>Parent_type</th>
+      <th>Parent_id</th>
+      <th>Full name</th>
+      <th>Company website</th>
+      <th>Company tax</th>      
+      <th>Person phone</th>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.ctype %></td>
+        <td><%= contact.contactable_type %></td>
+        <td><%= contact.contactable_id %></td>
+        <td><%= contact.full_name %></td>
+        <td><%= contact.company_website %></td>
+        <td><%= contact.company_tax_id %></td>        
+        <td><%= contact.person_phone %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact', new_contact_path %>

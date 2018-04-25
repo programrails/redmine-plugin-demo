@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Parent type:</strong>
+  <%= @contact.contactable_type %>
+</p>
+
+<p>
+  <strong>Parent id:</strong>
+  <%= @contact.contactable_id %>
+</p>
+
+<p>
+  <strong>Ctype:</strong>
+  <%= @contact.ctype %>
+</p>
+
+<p>
+  <strong>Ctype:</strong>
+  <%= @contact.ctype %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @contact.full_name %>
+</p>
+
+<p>
+  <strong>Company website:</strong>
+  <%= @contact.company_website %>
+</p>
+
+<p>
+  <strong>Company tax:</strong>
+  <%= @contact.company_tax_id %>
+</p>
+
+<p>
+  <strong>Person phone:</strong>
+  <%= @contact.person_phone %>
+</p>
+
+<% @contact.visible_custom_field_values.each do |custom_value| %>
+  <% if !custom_value.value.blank? %>
+    <li><%= custom_value.custom_field.name %>: <%= show_value(custom_value) %></li>
+  <% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>
